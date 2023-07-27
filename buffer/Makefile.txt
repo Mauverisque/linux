@@ -1,0 +1,15 @@
+obj-m += buffer.o
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+clean:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+
+app:read.o
+	gcc -o app read.o
+app.o:read.c
+	gcc -c read.c
+
+app:write.o
+	gcc -o app write.o
+app.o:write.c
+	gcc -c write.c
